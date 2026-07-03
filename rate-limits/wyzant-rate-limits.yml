@@ -1,0 +1,58 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Wyzant
+providerId: wyzant
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Tutoring
+- Affiliate
+- Partner API
+- Data Feed
+- Rate Limiting
+description: >-
+  Wyzant does not publish numeric per-minute or per-second rate limits for its
+  partner Search API. The one concrete usage constraint that is documented
+  applies to the Tutor Data Feed: because the feed file is large, partners are
+  asked to download it at most once per day, and Wyzant recommends refreshing a
+  local copy at least once per week. The real-time Search API is meant for
+  interactive, per-query use on a partner site and is gated by the requirement
+  of a valid partner API key; no explicit request-rate ceiling is documented.
+notes: >-
+  Numeric request-rate limits for /api/search are not documented as of the
+  review date. The only stated cadence constraint is the once-per-day download
+  guidance for /feeds/downloadFeed. Confirm any per-partner limits directly with
+  Wyzant partner support.
+sources:
+- https://support.wyzant.com/hc/en-us/articles/115005857526-API-Data-Feed-Documentation
+- https://support.wyzant.com/hc/en-us/articles/115005857506-Affiliate-platform-FAQs
+responseCodes:
+  throttled: 429
+limits:
+- name: Search API Requests
+  scope: partner
+  metric: requests
+  limit: not published
+  notes: No fixed numeric request-rate limit is documented for /api/search; a valid partner API key is required.
+- name: Data Feed Downloads
+  scope: partner
+  metric: downloads
+  limit: at most 1 per day
+  notes: Feed file is large; Wyzant asks partners to pull /feeds/downloadFeed no more than once per day.
+- name: Feed Refresh Cadence
+  scope: partner
+  metric: refresh
+  limit: at least weekly (recommended)
+  notes: Wyzant recommends refreshing the locally stored tutor dataset at least once per week.
+policies:
+- name: API Key Required
+  description: Both the Search API and Data Feed require a per-partner API key issued from the partner dashboard.
+- name: Daily Feed Cadence
+  description: Download the full tutor feed at most once per day and cache it locally rather than pulling it per page view.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on any 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

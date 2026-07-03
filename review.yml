@@ -1,0 +1,88 @@
+aid: wyzant
+name: Wyzant
+review:
+  question: Does Wyzant expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-03'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Wyzant exposes no realtime, streaming, or
+    bidirectional transport of any kind. Its consumer product (wyzant.com) is a
+    web/mobile marketplace with no documented public API, and its only
+    documented programmatic surface - the partner/affiliate Search API and Data
+    Feed on data.wyzant.com - is request/response HTTP (POST /api/search, GET
+    /feeds/downloadFeed) returning XML or JSON. There is no WebSocket (ws:// or
+    wss://) or Server-Sent Events endpoint to model.
+findings:
+  summary: |
+    Wyzant does not publish a documented public WebSocket API - nor a general
+    public REST API for consumers. Wyzant is a US tutoring marketplace connecting
+    students with independent tutors; students book, message, and pay for lessons
+    entirely through the wyzant.com product (paying the tutor's hourly rate plus a
+    Wyzant service fee), and none of those actions are exposed via a public API.
+    The one real, documented programmatic surface is Wyzant's partner/affiliate
+    data interface at data.wyzant.com, available to approved affiliates through
+    Wyzant's ShareASale-based partner program: a real-time Tutor Search API
+    (HTTP POST to /api/search) and a Tutor Data Feed (HTTP GET to
+    /feeds/downloadFeed), both keyed by a per-partner API key and returning XML
+    or JSON. Both are plain request/response HTTP; neither uses WebSocket.
+  openSource: |
+    Wyzant is a proprietary, closed-source commercial marketplace. There is no
+    open-source Wyzant server, SDK, or self-hostable component. Third-party
+    unofficial scraping/automation tools exist on GitHub but are not affiliated
+    with or endorsed by Wyzant.
+  publicApi: |
+    There is NO open public consumer API. The Search API and Data Feed are
+    gated behind an approved partner/affiliate account, which issues a personal
+    API key from https://www.wyzant.com/partner/advanced/api. They are documented
+    at support.wyzant.com and are real, but they are partner-only and read-only
+    (tutor discovery), not a full marketplace API for lessons, messaging, or
+    payments.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://data.wyzant.com
+      documented: true
+      note: Partner Search API (POST /api/search) and Data Feed (GET /feeds/downloadFeed). Partner API key required. XML or JSON.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere for Wyzant as of the review date.
+    - protocol: SSE
+      scheme: https
+      documented: false
+      note: No Server-Sent Events / streaming endpoint is documented.
+  endpointsConfirmedRest:
+    - POST https://data.wyzant.com/api/search
+    - GET  https://data.wyzant.com/feeds/downloadFeed
+  endpointsModeled:
+    - note: The OpenAPI request parameters and endpoint URLs are taken directly from Wyzant's published API & Data Feed documentation; the tutor response schema is modeled from the documented field list and is illustrative, not an authoritative contract.
+sources:
+  - url: https://support.wyzant.com/hc/en-us/articles/115005857526-API-Data-Feed-Documentation
+    type: Documentation
+    note: Official Wyzant API & Data Feed documentation - Search API and Data Feed endpoints, parameters, XML/JSON, API key.
+  - url: https://support.wyzant.com/hc/en-us/articles/115005857506-Affiliate-platform-FAQs
+    type: Documentation
+    note: Affiliate platform FAQ - partner program, API/datafeed/widgets, once-per-day feed guidance, lead bounty and payment schedule.
+  - url: https://www.wyzant.com/partner/shareasale/api
+    type: Documentation
+    note: Partner API page - ShareASale-based affiliate program, feeds and search API integration options.
+  - url: https://support.wyzant.com/hc/en-us/articles/208598116-What-is-the-service-fee
+    type: Documentation
+    note: Consumer service fee (percentage of lesson cost) charged on top of the tutor's hourly rate.
+  - url: https://highered.wyzant.com/partner
+    type: Website
+    note: Wyzant partner program landing page (www.wyzant.com/partner redirects here).
+  - url: https://www.wyzant.com
+    type: Website
+    note: Consumer tutoring marketplace - no public consumer API surfaced.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket or other server-push transport exists on Wyzant. Wyzant has no
+    public consumer API; its only documented programmatic surface is the
+    partner-only Search API and Data Feed, both request/response HTTP. No
+    AsyncAPI document was created because there is no realtime/streaming
+    transport to model.

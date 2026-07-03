@@ -1,0 +1,108 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Wyzant
+providerId: wyzant
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Tutoring
+- Marketplace
+- Affiliate
+- Partner API
+- Plans
+description: >-
+  Wyzant has two distinct commercial models, and neither is a metered API plan.
+  On the consumer side, Wyzant is a tutoring marketplace: students pay each
+  tutor's own hourly rate (roughly $35-$60/hour on average, ranging from about
+  $15 up to $485/hour depending on subject and tutor) plus a Wyzant service fee
+  charged as a percentage of the lesson cost. The first hour with a new tutor is
+  protected by Wyzant's Good Fit Guarantee. On the partner/developer side, the
+  Search API and Data Feed are not sold as paid tiers - they are a benefit of
+  Wyzant's free affiliate/partner program (ShareASale-based). Approved partners
+  get an API key at no charge and instead earn a bounty for each qualified
+  student lead they refer. Exact bounty amounts are set in Exhibit A of the
+  partner agreement and are not reconciled here.
+notes: >-
+  The consumer service fee percentage and the partner per-lead bounty are the
+  real monetary figures; verify current values on Wyzant's help center and in
+  the partner agreement during reconciliation. The service fee has been
+  published at around 9% of lesson cost; the per-lead bounty has been referenced
+  publicly around $8 per qualified student lead but is governed by the current
+  agreement.
+sources:
+- https://www.wyzant.com
+- https://support.wyzant.com/hc/en-us/articles/208598116-What-is-the-service-fee
+- https://support.wyzant.com/hc/en-us/articles/115005857506-Affiliate-platform-FAQs
+- https://support.wyzant.com/hc/en-us/articles/115005857526-API-Data-Feed-Documentation
+plans:
+- id: wyzant-student-marketplace
+  name: Student (Marketplace Lessons)
+  type: usage
+  description: >-
+    Students pay per lesson: the tutor's chosen hourly rate plus a Wyzant
+    service fee charged as a percentage of the lesson cost. No subscription or
+    platform fee to browse or book.
+  entries:
+  - label: Tutor Hourly Rate
+    name: tutor_hourly_rate
+    type: usage
+    metric: hours
+    limit: -1
+    timeFrame: month
+    geo: usa
+    unit: 1
+    price: set by each tutor (avg ~$35-$60/hr; range ~$15-$485/hr)
+    userMultiplied: false
+  - label: Service Fee
+    name: service_fee
+    type: usage
+    metric: lesson
+    limit: -1
+    timeFrame: month
+    geo: usa
+    unit: 1
+    price: percentage of lesson cost (published around 9%)
+    userMultiplied: false
+  elements:
+  - name: Access to Tutor Marketplace
+  - name: Online and In-Person Lessons
+  - name: Good Fit Guarantee (first hour)
+- id: wyzant-partner-affiliate
+  name: Partner / Affiliate (Search API + Data Feed)
+  type: free
+  description: >-
+    Free affiliate/partner program (ShareASale-based). Approved partners receive
+    a personal API key granting access to the real-time Tutor Search API and the
+    full Tutor Data Feed, and earn a bounty per qualified student lead referred.
+    There is no fee to access the API or feed.
+  entries:
+  - label: API and Feed Access
+    name: partner_api_access
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: usa
+    unit: 1
+    price: free (requires approved partner account)
+    userMultiplied: false
+  - label: Lead Bounty
+    name: lead_bounty
+    type: usage
+    metric: lead
+    limit: -1
+    timeFrame: month
+    geo: usa
+    unit: 1
+    price: bounty per qualified student lead (see partner agreement; ~$8 referenced)
+    userMultiplied: false
+  elements:
+  - name: Real-Time Tutor Search API
+  - name: Full Tutor Data Feed (XML/JSON)
+  - name: Search Widgets and Links
+  - name: Conversion Tracking (API key + channel)
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

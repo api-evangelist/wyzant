@@ -1,0 +1,92 @@
+aid: wyzant
+url: https://raw.githubusercontent.com/api-evangelist/wyzant/refs/heads/main/apis.yml
+name: Wyzant
+kind: company
+description: Wyzant is a US tutoring marketplace that connects students with
+  independent tutors for in-person and online lessons across thousands of
+  subjects. It is a consumer product, not a developer platform - students book
+  and pay for lessons through wyzant.com and pay a service fee on top of each
+  tutor's hourly rate, and there is no public REST API for managing lessons,
+  bookings, messages, or payments. Wyzant does, however, expose a real
+  partner/affiliate data API and data feed at data.wyzant.com for approved
+  affiliates (via the ShareASale-based partner program). These let a partner
+  run real-time keyword/location searches against the live tutor database and
+  download a full snapshot of all active tutors in XML or JSON, keyed by a
+  per-partner API key, so partners can surface Wyzant tutors on their own sites
+  and earn a per-lead bounty. Access requires a partner account; the API is not
+  open to the general public.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Tutoring
+- Education
+- Marketplace
+- Tutors
+- EdTech
+- Affiliate
+- Partner API
+- Data Feed
+created: '2026-07-03'
+modified: '2026-07-03'
+specificationVersion: '0.19'
+apis:
+- aid: wyzant:wyzant-tutor-search-api
+  name: Wyzant Tutor Search API
+  tags:
+  - Tutors
+  - Search
+  - Affiliate
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://support.wyzant.com/hc/en-us/articles/115005857526-API-Data-Feed-Documentation
+  baseURL: https://data.wyzant.com
+  properties:
+  - url: https://support.wyzant.com/hc/en-us/articles/115005857526-API-Data-Feed-Documentation
+    type: Documentation
+  - url: https://support.wyzant.com/hc/en-us/articles/115005857526-API-Data-Feed-Documentation
+    type: APIReference
+  - url: openapi/wyzant-openapi.yml
+    type: OpenAPI
+  description: Real-time search against Wyzant's live tutor database for approved
+    affiliates. An HTTP POST to /api/search with a partner API key and search
+    parameters (SearchString, ZIP, Distance, MinHourly/MaxHourly, MinAge/MaxAge,
+    gender, MaxResults) returns matching active tutors as XML or JSON, with
+    fields such as tutor name, location, fee per hour, rating, subjects, and a
+    tracked profile link. Intended for surfacing Wyzant tutors on a partner site
+    and earning a per-lead bounty; not a public consumer API.
+- aid: wyzant:wyzant-tutor-data-feed
+  name: Wyzant Tutor Data Feed
+  tags:
+  - Tutors
+  - Data Feed
+  - Bulk Export
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://support.wyzant.com/hc/en-us/articles/115005857526-API-Data-Feed-Documentation
+  baseURL: https://data.wyzant.com
+  properties:
+  - url: https://support.wyzant.com/hc/en-us/articles/115005857526-API-Data-Feed-Documentation
+    type: Documentation
+  - url: openapi/wyzant-openapi.yml
+    type: OpenAPI
+  description: Bulk data feed that returns a complete snapshot of all active
+    tutors listed on Wyzant at the time of the request. An HTTP GET to
+    /feeds/downloadFeed with a partner API key and a feedFormat of XML or JSON
+    (plus an optional maxResults for testing) downloads the full tutor dataset.
+    Because the file is large, Wyzant asks partners to pull it at most once per
+    day and recommends refreshing a local copy at least weekly.
+common:
+- type: LinkedIn
+  url: https://www.linkedin.com/company/wyzant
+- type: Website
+  url: https://www.wyzant.com
+- type: Documentation
+  url: https://support.wyzant.com/hc/en-us/articles/115005857526-API-Data-Feed-Documentation
+- type: PartnerProgram
+  url: https://highered.wyzant.com/partner
+- type: Plans
+  url: plans/wyzant-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/wyzant-rate-limits.yml
+- type: FinOps
+  url: finops/wyzant-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

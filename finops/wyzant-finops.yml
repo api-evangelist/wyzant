@@ -1,0 +1,96 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Wyzant
+providerId: wyzant
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Tutoring
+- Marketplace
+- Affiliate
+- Partner API
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Wyzant. Wyzant is a two-sided tutoring marketplace rather than
+  a metered API vendor, so "spend" depends on which side you are on. For a
+  student/consumer, cost is per lesson - the tutor's hourly rate times lesson
+  length, plus a Wyzant service fee (a percentage of lesson cost). For a
+  partner/affiliate, the Search API and Data Feed carry no usage fee; instead
+  the relationship is revenue-positive - the partner earns a bounty per
+  qualified student lead referred to Wyzant. There is no per-call or
+  per-record API billing to manage on either side, so traditional cloud-style
+  FinOps metering does not apply; the figures to track are lesson spend
+  (students) and lead revenue (partners).
+notes: >-
+  No usage-metered API invoice exists. Track consumer lesson spend and the
+  service-fee percentage on the student side, and per-lead bounty revenue on the
+  partner side. Verify the current service fee and bounty amounts with Wyzant
+  during reconciliation.
+sources:
+- https://www.wyzant.com
+- https://support.wyzant.com/hc/en-us/articles/208598116-What-is-the-service-fee
+- https://support.wyzant.com/hc/en-us/articles/115005857506-Affiliate-platform-FAQs
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Wyzant
+serviceCategory: Education and Tutoring Marketplace
+billingModel:
+  pricingCategory: Marketplace
+  billingFrequency: PerLesson
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+focusColumns:
+  ServiceName: Wyzant Tutoring
+  ServiceCategory: Education and Tutoring Marketplace
+  ProviderName: Wyzant
+  PublisherName: Wyzant
+  InvoiceIssuerName: Wyzant
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Marketplace
+meters:
+- name: lesson_hours
+  description: Tutor hours booked, billed at each tutor's hourly rate (student side).
+  unit: hours
+  aggregation: sum
+  dimensions:
+  - student
+  - tutor
+  - subject
+- name: service_fee
+  description: Wyzant service fee charged as a percentage of lesson cost (student side).
+  unit: usd
+  aggregation: sum
+  dimensions:
+  - student
+  - lesson
+- name: qualified_leads
+  description: Qualified student leads referred by a partner, each earning a bounty (partner side).
+  unit: leads
+  aggregation: sum
+  dimensions:
+  - partner
+  - channel
+principles:
+- name: Visibility
+  description: Students track lesson hours and service fees per tutor/subject; partners track qualified leads per channel.
+- name: Allocation
+  description: Use partner ChannelName labels to attribute leads (and bounty revenue) to specific placements or campaigns.
+- name: Optimization
+  description: Students optimize by using the Good Fit Guarantee first hour and comparing tutor rates; partners optimize placements toward the highest-converting subjects/locations.
+- name: Accountability
+  description: Reconcile monthly - lesson spend for students, and bounty payouts (processed on the 15th for the prior month) for partners.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
