@@ -73,6 +73,10 @@ apis:
     Because the file is large, Wyzant asks partners to pull it at most once per
     day and recommends refreshing a local copy at least weekly.
 common:
+- type: VulnerabilityDisclosure
+  url: security/wyzant-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/wyzant-domain-security.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/wyzant
 - type: Website
@@ -87,6 +91,8 @@ common:
   url: rate-limits/wyzant-rate-limits.yml
 - type: FinOps
   url: finops/wyzant-finops.yml
+- type: Blog
+  url: https://blog.wyzant.com/feed
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
