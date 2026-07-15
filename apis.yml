@@ -73,6 +73,8 @@ apis:
     Because the file is large, Wyzant asks partners to pull it at most once per
     day and recommends refreshing a local copy at least weekly.
 common:
+- type: AgenticAccess
+  url: agentic-access/wyzant-agentic-access.yml
 - type: VulnerabilityDisclosure
   url: security/wyzant-vulnerability-disclosure.yml
 - type: DomainSecurity
