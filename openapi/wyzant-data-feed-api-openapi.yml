@@ -1,0 +1,95 @@
+openapi: 3.0.3
+info:
+  title: Wyzant Partner Data Data Feed API
+  description: 'Partner/affiliate data interface for the Wyzant tutoring marketplace, served from data.wyzant.com. This is NOT a public consumer API for booking lessons, messaging tutors, or handling payments - those actions happen only through the wyzant.com product. This interface is available to approved affiliates (via Wyzant''s ShareASale-based partner program) and exposes two operations: a real-time Search API that queries the live tutor database, and a Data Feed that downloads a full snapshot of all active tutors. Both are authenticated with a per-partner API key issued from the partner dashboard at https://www.wyzant.com/partner/advanced/api and return XML or JSON. Request parameters and endpoint URLs below are taken from Wyzant''s published API & Data Feed documentation; the response schema is modeled from the documented field list and is illustrative, not an authoritative contract.'
+  version: '1.0'
+  contact:
+    name: Wyzant Partner Support
+    url: https://support.wyzant.com/hc/en-us/articles/115005857526-API-Data-Feed-Documentation
+  x-endpointsModeled: true
+servers:
+- url: https://data.wyzant.com
+  description: Wyzant partner data host
+tags:
+- name: Data Feed
+  description: Bulk snapshot download of all active tutors.
+paths:
+  /feeds/downloadFeed:
+    get:
+      operationId: downloadTutorFeed
+      tags:
+      - Data Feed
+      summary: Download a full snapshot of active tutors
+      description: Downloads a complete snapshot of all active tutors listed on Wyzant at the time of the request, in XML or JSON. Because the file is large, Wyzant asks partners to call this at most once per day and to refresh a local copy at least weekly.
+      parameters:
+      - name: apiKey
+        in: query
+        required: true
+        description: Wyzant-issued partner API key.
+        schema:
+          type: string
+      - name: feedFormat
+        in: query
+        required: true
+        description: Feed format.
+        schema:
+          type: string
+          enum:
+          - XML
+          - JSON
+      - name: maxResults
+        in: query
+        required: false
+        description: Optional cap on the number of tutors returned, useful for testing.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The full active-tutor snapshot.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Tutors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Tutor'
+        '401':
+          description: Missing or invalid partner API key.
+components:
+  schemas:
+    Tutor:
+      type: object
+      description: A tutor record as returned by the Search API and Data Feed. Modeled from Wyzant's documented field list; some fields are only returned to partners with restricted-access approval.
+      properties:
+        TutorID:
+          type: string
+          description: Unique identifier for the tutor.
+        Name:
+          type: string
+          description: Tutor display name.
+        City:
+          type: string
+        State:
+          type: string
+        ZIP:
+          type: string
+        FeePerHour:
+          type: number
+          description: Tutor's hourly rate in USD (before Wyzant service fee).
+        TravelDistance:
+          type: integer
+          description: Distance the tutor is willing to travel, in miles.
+        ProfileLink:
+          type: string
+          format: uri
+          description: Tracked link to the tutor's Wyzant profile.
+        Subjects:
+          type: array
+          items:
+            type: string
+          description: Subjects the tutor teaches.
+        StarRatingAverage:
+          type: number
+          description: Average star rating across the tutor's reviews.

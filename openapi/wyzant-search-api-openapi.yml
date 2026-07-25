@@ -1,0 +1,151 @@
+openapi: 3.0.3
+info:
+  title: Wyzant Partner Data Data Feed Search API
+  description: 'Partner/affiliate data interface for the Wyzant tutoring marketplace, served from data.wyzant.com. This is NOT a public consumer API for booking lessons, messaging tutors, or handling payments - those actions happen only through the wyzant.com product. This interface is available to approved affiliates (via Wyzant''s ShareASale-based partner program) and exposes two operations: a real-time Search API that queries the live tutor database, and a Data Feed that downloads a full snapshot of all active tutors. Both are authenticated with a per-partner API key issued from the partner dashboard at https://www.wyzant.com/partner/advanced/api and return XML or JSON. Request parameters and endpoint URLs below are taken from Wyzant''s published API & Data Feed documentation; the response schema is modeled from the documented field list and is illustrative, not an authoritative contract.'
+  version: '1.0'
+  contact:
+    name: Wyzant Partner Support
+    url: https://support.wyzant.com/hc/en-us/articles/115005857526-API-Data-Feed-Documentation
+  x-endpointsModeled: true
+servers:
+- url: https://data.wyzant.com
+  description: Wyzant partner data host
+tags:
+- name: Search
+  description: Real-time search against the live tutor database.
+paths:
+  /api/search:
+    post:
+      operationId: searchTutors
+      tags:
+      - Search
+      summary: Search active tutors in real time
+      description: Runs a real-time search against Wyzant's live tutor database and returns matching active tutors. Parameters are passed as form arguments. A valid partner API key (PartnerAPIKey) is required for conversion tracking.
+      parameters:
+      - name: PartnerAPIKey
+        in: query
+        required: true
+        description: Wyzant-issued partner API key (GUID) used for conversion tracking.
+        schema:
+          type: string
+      - name: SearchString
+        in: query
+        required: false
+        description: Free-text search string, typically a subject (e.g. "Accounting", "Excel").
+        schema:
+          type: string
+      - name: ZIP
+        in: query
+        required: false
+        description: US ZIP code to center a location-based search.
+        schema:
+          type: string
+      - name: Distance
+        in: query
+        required: false
+        description: Search radius in miles around the ZIP code.
+        schema:
+          type: integer
+          default: 40
+      - name: IsMale
+        in: query
+        required: false
+        description: Filter tutors by gender.
+        schema:
+          type: boolean
+      - name: MinHourly
+        in: query
+        required: false
+        description: Minimum tutor hourly rate in USD.
+        schema:
+          type: number
+      - name: MaxHourly
+        in: query
+        required: false
+        description: Maximum tutor hourly rate in USD.
+        schema:
+          type: number
+      - name: MinAge
+        in: query
+        required: false
+        description: Minimum tutor age.
+        schema:
+          type: integer
+      - name: MaxAge
+        in: query
+        required: false
+        description: Maximum tutor age.
+        schema:
+          type: integer
+      - name: MaxResults
+        in: query
+        required: false
+        description: Maximum number of tutors to return.
+        schema:
+          type: integer
+      - name: ChannelName
+        in: query
+        required: false
+        description: Partner-defined channel label for conversion tracking.
+        schema:
+          type: string
+      - name: ResultsFormat
+        in: query
+        required: false
+        description: Response format.
+        schema:
+          type: string
+          enum:
+          - JSON
+          - XML
+          default: JSON
+      responses:
+        '200':
+          description: An array of matching active tutors.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Tutors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Tutor'
+        '401':
+          description: Missing or invalid partner API key.
+components:
+  schemas:
+    Tutor:
+      type: object
+      description: A tutor record as returned by the Search API and Data Feed. Modeled from Wyzant's documented field list; some fields are only returned to partners with restricted-access approval.
+      properties:
+        TutorID:
+          type: string
+          description: Unique identifier for the tutor.
+        Name:
+          type: string
+          description: Tutor display name.
+        City:
+          type: string
+        State:
+          type: string
+        ZIP:
+          type: string
+        FeePerHour:
+          type: number
+          description: Tutor's hourly rate in USD (before Wyzant service fee).
+        TravelDistance:
+          type: integer
+          description: Distance the tutor is willing to travel, in miles.
+        ProfileLink:
+          type: string
+          format: uri
+          description: Tracked link to the tutor's Wyzant profile.
+        Subjects:
+          type: array
+          items:
+            type: string
+          description: Subjects the tutor teaches.
+        StarRatingAverage:
+          type: number
+          description: Average star rating across the tutor's reviews.
