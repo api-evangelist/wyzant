@@ -1,0 +1,16 @@
+{
+  "provider": "wyzant",
+  "sources": [
+    "wyzant-data-feed-api-openapi.yml",
+    "wyzant-search-api-openapi.yml"
+  ],
+  "outputs": [
+    "wyzant-data-feed-api-openapi.yml",
+    "wyzant-search-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
