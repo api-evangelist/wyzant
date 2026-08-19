@@ -1,0 +1,305 @@
+{
+  "item": [
+    {
+      "id": "a420c3ee-ec65-4c66-9eb8-a0cebaeb5cd0",
+      "name": "Search",
+      "description": {
+        "content": "Real-time search against the live tutor database.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "080827a5-7de6-45e3-8295-c75135bfa007",
+          "name": "Search active tutors in real time",
+          "request": {
+            "name": "Search active tutors in real time",
+            "description": {
+              "content": "Runs a real-time search against Wyzant's live tutor database and returns matching active tutors. Parameters are passed as form arguments. A valid partner API key (PartnerAPIKey) is required for conversion tracking.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "PartnerAPIKey",
+                  "value": "<string>",
+                  "description": "(Required) Wyzant-issued partner API key (GUID) used for conversion tracking."
+                },
+                {
+                  "disabled": false,
+                  "key": "SearchString",
+                  "value": "<string>",
+                  "description": "Free-text search string, typically a subject (e.g. \"Accounting\", \"Excel\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "ZIP",
+                  "value": "<string>",
+                  "description": "US ZIP code to center a location-based search."
+                },
+                {
+                  "disabled": false,
+                  "key": "Distance",
+                  "value": "40",
+                  "description": "Search radius in miles around the ZIP code."
+                },
+                {
+                  "disabled": false,
+                  "key": "IsMale",
+                  "value": "<boolean>",
+                  "description": "Filter tutors by gender."
+                },
+                {
+                  "disabled": false,
+                  "key": "MinHourly",
+                  "value": "<number>",
+                  "description": "Minimum tutor hourly rate in USD."
+                },
+                {
+                  "disabled": false,
+                  "key": "MaxHourly",
+                  "value": "<number>",
+                  "description": "Maximum tutor hourly rate in USD."
+                },
+                {
+                  "disabled": false,
+                  "key": "MinAge",
+                  "value": "<integer>",
+                  "description": "Minimum tutor age."
+                },
+                {
+                  "disabled": false,
+                  "key": "MaxAge",
+                  "value": "<integer>",
+                  "description": "Maximum tutor age."
+                },
+                {
+                  "disabled": false,
+                  "key": "MaxResults",
+                  "value": "<integer>",
+                  "description": "Maximum number of tutors to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "ChannelName",
+                  "value": "<string>",
+                  "description": "Partner-defined channel label for conversion tracking."
+                },
+                {
+                  "disabled": false,
+                  "key": "ResultsFormat",
+                  "value": "JSON",
+                  "description": "Response format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c3b64365-76f6-4803-ae16-a93b58db83ca",
+              "name": "An array of matching active tutors.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "PartnerAPIKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "SearchString",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ZIP",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Distance",
+                      "value": "40"
+                    },
+                    {
+                      "key": "IsMale",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "MinHourly",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "MaxHourly",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "MinAge",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "MaxAge",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "MaxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ChannelName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ResultsFormat",
+                      "value": "JSON"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Tutors\": [\n    {\n      \"TutorID\": \"string\",\n      \"Name\": \"string\",\n      \"City\": \"string\",\n      \"State\": \"string\",\n      \"ZIP\": \"string\",\n      \"FeePerHour\": 7746.674304422524,\n      \"TravelDistance\": 3361,\n      \"ProfileLink\": \"https://aKcSdExY.dblxhiJwt3ICfzFqR,g,XwkfZe2.5ZySGBPSuOfqTrGxDDJczh9Ic2u-UI-\",\n      \"Subjects\": [\n        \"string\",\n        \"string\"\n      ],\n      \"StarRatingAverage\": 8697.020494850372\n    },\n    {\n      \"TutorID\": \"string\",\n      \"Name\": \"string\",\n      \"City\": \"string\",\n      \"State\": \"string\",\n      \"ZIP\": \"string\",\n      \"FeePerHour\": 6950.572582966609,\n      \"TravelDistance\": 8624,\n      \"ProfileLink\": \"http://fiAxijAfsPNUaHrXfvjrBxCbNweN.lbMcXZ2WoA\",\n      \"Subjects\": [\n        \"string\",\n        \"string\"\n      ],\n      \"StarRatingAverage\": 7099.856294169507\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7063788f-fd19-4083-8a18-041cedafe967",
+              "name": "Missing or invalid partner API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "PartnerAPIKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "SearchString",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ZIP",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Distance",
+                      "value": "40"
+                    },
+                    {
+                      "key": "IsMale",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "MinHourly",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "MaxHourly",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "MinAge",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "MaxAge",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "MaxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ChannelName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ResultsFormat",
+                      "value": "JSON"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://data.wyzant.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a5d2bdeb-1613-45ae-acfd-6161d4f44711",
+    "name": "Wyzant Partner Data Data Feed Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Partner/affiliate data interface for the Wyzant tutoring marketplace, served from data.wyzant.com. This is NOT a public consumer API for booking lessons, messaging tutors, or handling payments - those actions happen only through the wyzant.com product. This interface is available to approved affiliates (via Wyzant's ShareASale-based partner program) and exposes two operations: a real-time Search API that queries the live tutor database, and a Data Feed that downloads a full snapshot of all active tutors. Both are authenticated with a per-partner API key issued from the partner dashboard at https://www.wyzant.com/partner/advanced/api and return XML or JSON. Request parameters and endpoint URLs below are taken from Wyzant's published API & Data Feed documentation; the response schema is modeled from the documented field list and is illustrative, not an authoritative contract.\n\nContact Support:\n Name: Wyzant Partner Support",
+      "type": "text/plain"
+    }
+  }
+}

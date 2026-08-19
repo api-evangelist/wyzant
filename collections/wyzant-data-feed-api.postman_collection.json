@@ -1,0 +1,179 @@
+{
+  "item": [
+    {
+      "id": "5f5c4b90-1acb-49f8-a697-d5baf1c587c5",
+      "name": "Data Feed",
+      "description": {
+        "content": "Bulk snapshot download of all active tutors.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "82168f99-62e8-4ea9-8af7-a34a3a6ae69c",
+          "name": "Download a full snapshot of active tutors",
+          "request": {
+            "name": "Download a full snapshot of active tutors",
+            "description": {
+              "content": "Downloads a complete snapshot of all active tutors listed on Wyzant at the time of the request, in XML or JSON. Because the file is large, Wyzant asks partners to call this at most once per day and to refresh a local copy at least weekly.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "feeds",
+                "downloadFeed"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apiKey",
+                  "value": "<string>",
+                  "description": "(Required) Wyzant-issued partner API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "feedFormat",
+                  "value": "<string>",
+                  "description": "(Required) Feed format."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxResults",
+                  "value": "<integer>",
+                  "description": "Optional cap on the number of tutors returned, useful for testing."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0cdfaa93-3143-444b-aac6-59b76cff67f8",
+              "name": "The full active-tutor snapshot.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "feeds",
+                    "downloadFeed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "feedFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Tutors\": [\n    {\n      \"TutorID\": \"string\",\n      \"Name\": \"string\",\n      \"City\": \"string\",\n      \"State\": \"string\",\n      \"ZIP\": \"string\",\n      \"FeePerHour\": 4062.418046086389,\n      \"TravelDistance\": 135,\n      \"ProfileLink\": \"https://spRynXrUxAZFGzqscpdNWBFhVRYo.eifx7IfmC-Zpg-incWl,j4pKnfPAY7s7r0lk7xO1\",\n      \"Subjects\": [\n        \"string\",\n        \"string\"\n      ],\n      \"StarRatingAverage\": 838.0070775918325\n    },\n    {\n      \"TutorID\": \"string\",\n      \"Name\": \"string\",\n      \"City\": \"string\",\n      \"State\": \"string\",\n      \"ZIP\": \"string\",\n      \"FeePerHour\": 150.73056420943365,\n      \"TravelDistance\": 8134,\n      \"ProfileLink\": \"https://svg.xhsyNRvwY4AiQHuuw97GWfiuTEOQotSIEqdYVAprN0V+Fst9z17sSDm4giq10kaQW\",\n      \"Subjects\": [\n        \"string\",\n        \"string\"\n      ],\n      \"StarRatingAverage\": 6622.496106679178\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "267fa09d-2251-4765-8d3c-21a6dedbf936",
+              "name": "Missing or invalid partner API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "feeds",
+                    "downloadFeed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "feedFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://data.wyzant.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2df8ad53-4300-4726-be39-7bbe90fccd9e",
+    "name": "Wyzant Partner Data Data Feed API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Partner/affiliate data interface for the Wyzant tutoring marketplace, served from data.wyzant.com. This is NOT a public consumer API for booking lessons, messaging tutors, or handling payments - those actions happen only through the wyzant.com product. This interface is available to approved affiliates (via Wyzant's ShareASale-based partner program) and exposes two operations: a real-time Search API that queries the live tutor database, and a Data Feed that downloads a full snapshot of all active tutors. Both are authenticated with a per-partner API key issued from the partner dashboard at https://www.wyzant.com/partner/advanced/api and return XML or JSON. Request parameters and endpoint URLs below are taken from Wyzant's published API & Data Feed documentation; the response schema is modeled from the documented field list and is illustrative, not an authoritative contract.\n\nContact Support:\n Name: Wyzant Partner Support",
+      "type": "text/plain"
+    }
+  }
+}

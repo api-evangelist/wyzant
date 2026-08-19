@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wyzant Partner Data Data Feed API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data Feed",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download a full snapshot of active tutors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.wyzant.com/feeds/downloadFeed",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "query",
+                "description": "Wyzant-issued partner API key."
+              },
+              {
+                "name": "feedFormat",
+                "value": "",
+                "type": "query",
+                "description": "Feed format."
+              },
+              {
+                "name": "maxResults",
+                "value": "",
+                "type": "query",
+                "description": "Optional cap on the number of tutors returned, useful for testing."
+              }
+            ]
+          },
+          "docs": "Downloads a complete snapshot of all active tutors listed on Wyzant at the time of the request, in XML or JSON. Because the file is large, Wyzant asks partners to call this at most once per day and to refresh a local copy at least weekly."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

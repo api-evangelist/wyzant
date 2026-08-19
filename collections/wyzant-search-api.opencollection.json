@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wyzant Partner Data Data Feed Search API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search active tutors in real time",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://data.wyzant.com/api/search",
+            "params": [
+              {
+                "name": "PartnerAPIKey",
+                "value": "",
+                "type": "query",
+                "description": "Wyzant-issued partner API key (GUID) used for conversion tracking."
+              },
+              {
+                "name": "SearchString",
+                "value": "",
+                "type": "query",
+                "description": "Free-text search string, typically a subject (e.g. \"Accounting\", \"Excel\")."
+              },
+              {
+                "name": "ZIP",
+                "value": "",
+                "type": "query",
+                "description": "US ZIP code to center a location-based search."
+              },
+              {
+                "name": "Distance",
+                "value": "",
+                "type": "query",
+                "description": "Search radius in miles around the ZIP code."
+              },
+              {
+                "name": "IsMale",
+                "value": "",
+                "type": "query",
+                "description": "Filter tutors by gender."
+              },
+              {
+                "name": "MinHourly",
+                "value": "",
+                "type": "query",
+                "description": "Minimum tutor hourly rate in USD."
+              },
+              {
+                "name": "MaxHourly",
+                "value": "",
+                "type": "query",
+                "description": "Maximum tutor hourly rate in USD."
+              },
+              {
+                "name": "MinAge",
+                "value": "",
+                "type": "query",
+                "description": "Minimum tutor age."
+              },
+              {
+                "name": "MaxAge",
+                "value": "",
+                "type": "query",
+                "description": "Maximum tutor age."
+              },
+              {
+                "name": "MaxResults",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of tutors to return."
+              },
+              {
+                "name": "ChannelName",
+                "value": "",
+                "type": "query",
+                "description": "Partner-defined channel label for conversion tracking."
+              },
+              {
+                "name": "ResultsFormat",
+                "value": "",
+                "type": "query",
+                "description": "Response format."
+              }
+            ]
+          },
+          "docs": "Runs a real-time search against Wyzant's live tutor database and returns matching active tutors. Parameters are passed as form arguments. A valid partner API key (PartnerAPIKey) is required for conversion tracking."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
