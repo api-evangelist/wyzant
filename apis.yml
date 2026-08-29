@@ -15,6 +15,18 @@ description: Wyzant is a US tutoring marketplace that connects students with
   per-partner API key, so partners can surface Wyzant tutors on their own sites
   and earn a per-lead bounty. Access requires a partner account; the API is not
   open to the general public.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: approval
