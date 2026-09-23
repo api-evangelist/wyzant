@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Wyzant Partner Data Data Feed API
-  description: 'Partner/affiliate data interface for the Wyzant tutoring marketplace, served from data.wyzant.com. This is NOT a public consumer API for booking lessons, messaging tutors, or handling payments - those actions happen only through the wyzant.com product. This interface is available to approved affiliates (via Wyzant''s ShareASale-based partner program) and exposes two operations: a real-time Search API that queries the live tutor database, and a Data Feed that downloads a full snapshot of all active tutors. Both are authenticated with a per-partner API key issued from the partner dashboard at https://www.wyzant.com/partner/advanced/api and return XML or JSON. Request parameters and endpoint URLs below are taken from Wyzant''s published API & Data Feed documentation; the response schema is modeled from the documented field list and is illustrative, not an authoritative contract.'
+  description: Partner/affiliate data interface for the Wyzant tutoring marketplace, served from data.wyzant.com.
   version: '1.0'
   contact:
     name: Wyzant Partner Support
