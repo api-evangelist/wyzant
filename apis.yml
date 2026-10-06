@@ -59,7 +59,7 @@ tags_raw:
 - Partner API
 - Data Feed
 created: '2026-07-03'
-modified: '2026-07-03'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: wyzant:wyzant-data-feed-api
@@ -91,6 +91,8 @@ apis:
   - type: APIReference
     url: https://support.wyzant.com/hc/en-us/articles/115005857526-API-Data-Feed-Documentation
 common:
+- url: https://blog.wyzant.com/feed/
+  type: BlogRSS
 - type: AgenticAccess
   url: agentic-access/wyzant-agentic-access.yml
 - type: VulnerabilityDisclosure
