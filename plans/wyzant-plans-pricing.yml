@@ -111,3 +111,31 @@ plans:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - metered
+  - subscription
+  units:
+  - compute
+  - period
+  plans:
+  - name: Student (Marketplace Lessons)
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - compute
+    - other
+    periods:
+    - month
+  - name: Partner / Affiliate (Search API + Data Feed)
+    access: free
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    - period
+    periods:
+    - month
