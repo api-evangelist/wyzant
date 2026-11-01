@@ -1,4 +1,4 @@
-# Wyzant (wyzant)
+# Wyzant
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,90 +64,118 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Wyzant is a US tutoring marketplace that connects students with independent tutors for in-person and online lessons across thousands of subjects. It is a consumer product, not a developer platform: students browse, book, message, and pay for lessons through wyzant.com, paying each tutor's hourly rate plus a Wyzant service fee (a percentage of the lesson cost). There is **no public REST API** for managing lessons, bookings, messages, or payments.
+Wyzant is a US tutoring marketplace that connects students with independent tutors for in-person and online lessons across thousands of subjects. It is a consumer product, not a developer platform - students book and pay for lessons through wyzant.com and pay a service fee on top of each tutor's hourly rate, and there is no public REST API for managing lessons, bookings, messages, or payments. Wyzant does, however, expose a real partner/affiliate data API and data feed at data.wyzant.com for approved affiliates (via the ShareASale-based partner program). These let a partner run real-time keyword/location searches against the live tutor database and download a full snapshot of all active tutors in XML or JSON, keyed by a per-partner API key, so partners can surface Wyzant tutors on their own sites and earn a per-lead bounty. Access requires a partner account; the API is not open to the general public.
 
-Wyzant does, however, expose a real **partner/affiliate data interface** at `data.wyzant.com` for approved affiliates (via Wyzant's ShareASale-based partner program). It offers a real-time **Tutor Search API** and a bulk **Tutor Data Feed**, both keyed by a per-partner API key and returning XML or JSON, so partners can surface Wyzant tutors on their own sites and earn a bounty per qualified student lead. Access requires an approved partner account; the API is not open to the general public.
+**Areas:** Tutoring · Education · Marketplace · Tutors · EdTech · Affiliates · Partner API · Data Feed
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/wyzant/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/wyzant/refs/heads/main/apis.yml)
+## Wyzant on APIs.io
 
-## API Access Model
+Everything profiled for Wyzant is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/wyzant/](https://apis.io/providers/wyzant/)** — or go straight to one of the APIs or properties below.
 
-- **Consumer marketplace (wyzant.com):** No public API. All lesson booking, messaging, and payment happens in the product.
-- **Partner / affiliate (data.wyzant.com):** Real, documented, partner-only. Requires an API key issued from the partner dashboard. Read-only tutor discovery (search + full feed).
-- **Open source:** None. Wyzant is proprietary; there is no SDK or self-hostable component.
-- **WebSocket / realtime:** None documented.
+### APIs (2)
 
-## Tags
+- [Wyzant Data Feed API](https://apis.io/apis/wyzant/wyzant-data-feed-api/) — Bulk snapshot download of all active tutors.
+- [Wyzant Search API](https://apis.io/apis/wyzant/wyzant-search-api/) — Real-time search against the live tutor database.
 
-- Tutoring
-- Education
-- Marketplace
-- Tutors
-- EdTech
-- Affiliate
-- Partner API
-- Data Feed
+### Published properties
 
-## Timestamps
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- **Created:** 2026-07-03
-- **Modified:** 2026-07-03
+#### Agentic access (1)
 
-## APIs
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### Wyzant Tutor Search API
+- [Wyzant Agentic Access](https://apis.io/agentic-access/wyzant/wyzant-agentic-access/)
 
-Real-time search against Wyzant's live tutor database for approved affiliates. An HTTP `POST` to `/api/search` with a partner API key and search parameters (`SearchString`, `ZIP`, `Distance`, `MinHourly`/`MaxHourly`, `MinAge`/`MaxAge`, gender, `MaxResults`) returns matching active tutors as XML or JSON, with fields such as tutor name, location, fee per hour, rating, subjects, and a tracked profile link.
+#### Collections (2)
 
-- **Human URL:** [API & Data Feed Documentation](https://support.wyzant.com/hc/en-us/articles/115005857526-API-Data-Feed-Documentation)
-- **Base URL:** `https://data.wyzant.com`
+Postman and Open Collection request collections.
 
-#### Tags
+- [Wyzant Partner Data Data Feed API](https://apis.io/collections/wyzant/open-wyzant-data-feed-api/)
+- [Wyzant Partner Data Data Feed Search API](https://apis.io/collections/wyzant/open-wyzant-search-api/)
 
-- Tutors
-- Search
-- Affiliate
+#### Security (2)
 
-#### Properties
+Authentication, trust centre, and vulnerability disclosure.
 
-- [Documentation](https://support.wyzant.com/hc/en-us/articles/115005857526-API-Data-Feed-Documentation)
-- [API Reference](https://support.wyzant.com/hc/en-us/articles/115005857526-API-Data-Feed-Documentation)
-- [OpenAPI](openapi/wyzant-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Wyzant Domain Security](https://apis.io/security/wyzant/wyzant-domain-security/)
+- [Wyzant Vulnerability Disclosure](https://apis.io/security/wyzant/wyzant-vulnerability-disclosure/)
 
-### Wyzant Tutor Data Feed
+#### Plans and pricing (1)
 
-Bulk data feed that returns a complete snapshot of all active tutors listed on Wyzant at the time of the request. An HTTP `GET` to `/feeds/downloadFeed` with a partner API key and a `feedFormat` of XML or JSON (plus an optional `maxResults` for testing) downloads the full tutor dataset. Because the file is large, Wyzant asks partners to pull it at most once per day and to refresh a local copy at least weekly.
+Published plans, tiers and prices.
 
-- **Human URL:** [API & Data Feed Documentation](https://support.wyzant.com/hc/en-us/articles/115005857526-API-Data-Feed-Documentation)
-- **Base URL:** `https://data.wyzant.com`
+- [Wyzant Plans Pricing](https://apis.io/plans/wyzant/wyzant-plans-pricing/)
 
-#### Tags
+#### Rate limits (1)
 
-- Tutors
-- Data Feed
-- Bulk Export
+Published request limits.
 
-#### Properties
+- [Wyzant Rate Limits](https://apis.io/rate-limits/wyzant/wyzant-rate-limits/)
 
-- [Documentation](https://support.wyzant.com/hc/en-us/articles/115005857526-API-Data-Feed-Documentation)
-- [OpenAPI](openapi/wyzant-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+#### FinOps (1)
 
-## Common Properties
+What the API costs to run, by operation.
 
-- [LinkedIn](https://www.linkedin.com/company/wyzant)
+- [Wyzant Finops](https://apis.io/finops/wyzant/wyzant-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.wyzant.com)
 - [Documentation](https://support.wyzant.com/hc/en-us/articles/115005857526-API-Data-Feed-Documentation)
-- [Partner Program](https://highered.wyzant.com/partner)
-- [Plans](plans/wyzant-plans-pricing.yml)
-- [Rate Limits](rate-limits/wyzant-rate-limits.yml)
-- [Fin Ops](finops/wyzant-finops.yml)
+- [Blog](https://blog.wyzant.com/feed)
 
-## Pricing
+## API Evangelist rating
 
-- **Students:** Pay each tutor's hourly rate (average roughly $35–$60/hour; range from about $15 up to $485/hour depending on subject and tutor) plus a Wyzant service fee charged as a percentage of the lesson cost (published around 9%). The first hour with a new tutor is covered by the Good Fit Guarantee.
-- **Partners:** The Search API and Data Feed are free to approved affiliates; partners earn a bounty per qualified student lead (referenced publicly around $8 per lead; governed by the current partner agreement). Bounty payments are processed on the 15th of the month for the prior month.
+**Kin Score 23.0** — emerging · rubric 0.24.0 · scored 2026-10-17
 
-## Maintainers
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 45.9 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 19.0 |
+| Access clarity | 5.3 |
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Agent readiness 15.4** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/wyzant/](https://apis.io/providers/wyzant/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Wyzant: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/wyzant/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
